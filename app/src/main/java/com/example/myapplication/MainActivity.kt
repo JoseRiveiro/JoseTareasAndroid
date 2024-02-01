@@ -168,11 +168,11 @@ fun TodoItem(todo: Todo, onTaskCheckedChange: (Todo) -> Unit, onTaskDelete: (Tod
             verticalAlignment = Alignment.CenterVertically
         ) {
 
-            var myState by remember { mutableStateOf(false) }
+            var checked by remember { mutableStateOf( todo.isCompleted) }
             Checkbox(
 
-                checked = myState,
-                onCheckedChange = {myState = it },
+                checked = checked,
+                onCheckedChange = {checked = it },
                 modifier = Modifier.padding(end = 16.dp)
 
             )

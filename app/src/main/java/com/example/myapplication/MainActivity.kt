@@ -50,9 +50,12 @@ class TodoViewModel : ViewModel() {
 }
 
 data class Todo(
+
     val id: Int,
     val task: String,
+
     var isCompleted: Boolean = false
+
 )
 class MainActivity : ComponentActivity() {
     private val viewModel by viewModels<TodoViewModel>()
@@ -148,6 +151,7 @@ fun TodoList(
 
 @Composable
 fun TodoItem(todo: Todo, onTaskCheckedChange: (Todo) -> Unit, onTaskDelete: (Todo) -> Unit) {
+    val checkBoxStates by remember { mutableStateOf("") }
     Card(
         modifier = Modifier
 
@@ -164,19 +168,11 @@ fun TodoItem(todo: Todo, onTaskCheckedChange: (Todo) -> Unit, onTaskDelete: (Tod
             verticalAlignment = Alignment.CenterVertically
         ) {
 
-
+            var myState by remember { mutableStateOf(false) }
             Checkbox(
 
-                checked = todo.isCompleted,
-                onCheckedChange = {
-
-                                  if(todo.isCompleted == true){
-                                      todo.isCompleted = false;
-                                  } else {
-                                      todo.isCompleted = true;
-                                  }
-
-                },
+                checked = myState,
+                onCheckedChange = {myState = it },
                 modifier = Modifier.padding(end = 16.dp)
 
             )

@@ -55,12 +55,12 @@ data class Todo(
 
 class MainActivity : ComponentActivity() {
 
-    private val viewModel by viewModels<TaskViewModel>()
+    private val taskviewModel by viewModels<TaskViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
-            TodoApp(viewModel)
+            TodoApp(taskviewModel)
         }
         }
 

@@ -1,11 +1,7 @@
-package com.example.myapplication
 
-import TaskEntity
-import TaskViewModel
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -41,6 +37,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 data class Todo(
 
@@ -52,25 +50,31 @@ data class Todo(
 )
 
 
-
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val taskviewModel by viewModels<TaskViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
-            TodoApp(taskviewModel)
+            TodoApp()
         }
+        
         }
 
     }
 
 @Composable
-fun TodoApp(viewModel: TaskViewModel ) {
+//Agregar HiltViewModewl
+fun TodoApp(modifier: Modifier = Modifier,
+            viewModel: TaskViewModel = hiltViewModel()
+) {
 
     var todos by remember { mutableStateOf<List<TaskEntity>>(emptyList()) }
     var newTaskText by remember { mutableStateOf("") }
+
+
 
     Column(
         modifier = Modifier
@@ -131,7 +135,7 @@ fun TodoList(
 
     LazyColumn {
         items(todos) { task ->
-            TodoItem(task, onTaskCheckedChange , onTaskEdit)
+            TodoItem(task, onTaskCheckedChange, onTaskEdit)
         }
 
     }

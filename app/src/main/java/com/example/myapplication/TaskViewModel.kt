@@ -1,6 +1,7 @@
-
+package com.example.myapplication
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.myapplication.bd.room.TaskDao
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -8,7 +9,7 @@ import javax.inject.Inject
 @HiltViewModel
 class TaskViewModel @Inject constructor(private val taskDao: TaskDao) : ViewModel() {
 
-    val todos: List<TaskEntity> = taskDao.getAll()
+    // val todos: List<TaskEntity> = taskDao.getAll()
 
     fun addTask(title: String) {
         viewModelScope.launch {

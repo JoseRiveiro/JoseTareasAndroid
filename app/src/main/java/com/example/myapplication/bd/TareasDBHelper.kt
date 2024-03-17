@@ -1,10 +1,12 @@
-package BD
+package com.example.myapplication.bd
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class TareasDBHelper(contex: Context): SQLiteOpenHelper(contex,DATABASE_NAME, null, DATABASE_VERSION) {
+class TareasDBHelper(contex: Context): SQLiteOpenHelper(contex,
+    DATABASE_NAME, null, DATABASE_VERSION
+) {
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(SQL_CREATE_ENTRIES)
     }

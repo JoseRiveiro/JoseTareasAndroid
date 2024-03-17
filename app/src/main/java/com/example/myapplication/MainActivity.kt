@@ -1,4 +1,4 @@
-
+package com.example.myapplication
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -40,34 +40,22 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-data class Todo(
-
-    val id: Int,
-    val title: String,
-
-    var isCompleted: Boolean = false
-
-)
-
-
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
-            TodoApp()
+            TodoApp2()
         }
-        
         }
 
     }
 
 @Composable
 //Agregar HiltViewModewl
-fun TodoApp(modifier: Modifier = Modifier,
+fun TodoApp2(modifier: Modifier = Modifier,
             viewModel: TaskViewModel = hiltViewModel()
 ) {
 

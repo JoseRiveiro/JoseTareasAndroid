@@ -1,9 +1,10 @@
-
+package com.example.myapplication.bd.room
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import com.example.myapplication.TaskEntity
 
 @Dao
 interface TaskDao {

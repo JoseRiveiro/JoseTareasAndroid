@@ -1,6 +1,4 @@
-package domain
-
-import TaskEntity
+package com.example.myapplication
 
 data class Tarea (
     val id: Long,

@@ -1,4 +1,4 @@
-package BD
+package com.example.myapplication.bd
 
 import android.provider.BaseColumns
 

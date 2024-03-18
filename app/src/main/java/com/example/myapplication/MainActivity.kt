@@ -23,6 +23,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -54,7 +55,7 @@ fun TodoApp2(modifier: Modifier = Modifier,
             viewModel: TaskViewModel = hiltViewModel()
 ) {
 
-    var todos by remember { mutableStateOf<List<TaskEntity>>(emptyList()) }
+    val todos by viewModel.state.collectAsState()
     var newTaskText by remember { mutableStateOf("") }
 
 
@@ -65,7 +66,7 @@ fun TodoApp2(modifier: Modifier = Modifier,
             .padding(16.dp)
     ) {
         // Lista de tareas
-        TodoList(todos = todos, viewModel::updateTask, viewModel::addTask)
+        TodoList(todos = todos, viewModel::updateTask, viewModel::addTask, viewModel::deleteTask)
 
 
         // Espaciador
@@ -87,6 +88,7 @@ fun TodoApp2(modifier: Modifier = Modifier,
                 if (newTaskText.isNotEmpty()) {
                     viewModel.addTask(title = newTaskText)
                     newTaskText = ""
+
                 }
             },
             modifier = Modifier
@@ -101,15 +103,16 @@ fun TodoApp2(modifier: Modifier = Modifier,
 @Composable
 fun TodoList(
 
-    todos: List<TaskEntity>,
-    onTaskCheckedChange: (TaskEntity) -> Unit,
-    onTaskEdit: (TaskEntity) -> Unit
+    todos: List<Tarea>,
+    onTaskCheckedChange: (Tarea) -> Unit,
+    onTaskEdit: (Tarea) -> Unit,
+    onDeleteTask :(Tarea) -> Unit
 
 ) {
 
     LazyColumn {
         items(todos) { task ->
-            TodoItem(task, onTaskCheckedChange, onTaskEdit)
+            TodoItem(task, onTaskCheckedChange, onTaskEdit, onDeleteTask)
         }
 
     }
@@ -118,7 +121,7 @@ fun TodoList(
 
 
 @Composable
-fun TodoItem(todo: TaskEntity, onTaskCheckedChange: (TaskEntity) -> Unit, onTaskEdit: (TaskEntity) -> Unit) {
+fun TodoItem(todo: Tarea, onTaskCheckedChange: (Tarea) -> Unit, onTaskEdit: (Tarea) -> Unit, onDeleteTask: (Tarea)-> Unit) {
 
 
 
@@ -142,7 +145,14 @@ fun TodoItem(todo: TaskEntity, onTaskCheckedChange: (TaskEntity) -> Unit, onTask
             Checkbox(
 
                 checked = checked,
-                onCheckedChange = {onTaskCheckedChange(todo)},
+
+                onCheckedChange = {
+                    checked = it
+
+                    onTaskCheckedChange(todo.copy(isCompleted = it))
+                                  },
+
+
                 modifier = Modifier.padding(end = 16.dp)
 
             )
@@ -158,7 +168,8 @@ fun TodoItem(todo: TaskEntity, onTaskCheckedChange: (TaskEntity) -> Unit, onTask
 
             IconButton(
                 onClick = {
-                    onTaskEdit(todo)
+                    onDeleteTask(todo)
+
                 },
                 modifier = Modifier
                     .background(MaterialTheme.colorScheme.error)

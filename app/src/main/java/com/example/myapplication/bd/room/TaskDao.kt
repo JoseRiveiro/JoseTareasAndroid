@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.example.myapplication.TaskEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TaskDao {
@@ -12,7 +13,7 @@ interface TaskDao {
    // @Query("SELECT * FROM ${TareasDB.TABLE_NAME}")
 
     @Query("SELECT * FROM tasks")
-    fun getAll(): List<TaskEntity>
+    fun getAll(): Flow<List<TaskEntity>>
 
     @Insert
     suspend fun insertTask(task: TaskEntity)

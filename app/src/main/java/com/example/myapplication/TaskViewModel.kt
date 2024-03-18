@@ -2,37 +2,47 @@ package com.example.myapplication
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.bd.room.TaskDao
+import com.example.myapplication.data.repository.TaskRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TaskViewModel @Inject constructor(private val taskDao: TaskDao) : ViewModel() {
+class TaskViewModel @Inject constructor (private val taskDao: TaskDao, val taskRepository: TaskRepository) : ViewModel() {
 
-    val todos: List<TaskEntity> = taskDao.getAll()
+    //val todos: List<TaskEntity> = taskDao.getAll()
+private val _state = MutableStateFlow<List<Tarea>>(emptyList())
+    val state = _state
 
+    init { viewModelScope.launch {
+        taskRepository.getAllTasks().collect{
+            _state.emit(it)
+        }
+    }}
    fun addTask(title: String) {
         viewModelScope.launch {
-            val taskEntity = TaskEntity(title = title)
-            taskDao.insertTask(taskEntity)
+            val tarea = Tarea(title = title)
+            taskRepository.saveTask(tarea)
+
         }
     }
 
 
-   fun updateTask(task: TaskEntity) {
+   fun updateTask(task: Tarea) {
         viewModelScope.launch {
-            taskDao.updateTask(task)
+            taskRepository.updateTask(task)
         }
     }
 
-    fun addTask(task: TaskEntity) {
+    fun addTask(task: Tarea) {
         viewModelScope.launch {
-            taskDao.insertTask(task)
+
         }
     }
-    fun deleteTask(task: TaskEntity) {
+    fun deleteTask(task: Tarea) {
         viewModelScope.launch {
-            taskDao.deleteTask(task)
+            taskRepository.deleteTask(task)
 
         }
     }

@@ -9,14 +9,15 @@ import com.example.myapplication.TaskEntity
 @Dao
 interface TaskDao {
 
-    //@Query("SELECT * FROM ${TareasDB.TABLE_NAME}")
+   // @Query("SELECT * FROM ${TareasDB.TABLE_NAME}")
+
     @Query("SELECT * FROM tasks")
     fun getAll(): List<TaskEntity>
 
     @Insert
     suspend fun insertTask(task: TaskEntity)
     @Delete
-   suspend fun delete(task: TaskEntity)
+   suspend fun deleteTask(task: TaskEntity)
 
     @Update
     suspend fun updateTask(task: TaskEntity)

@@ -12,8 +12,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
@@ -30,12 +28,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,6 +46,7 @@ class MainActivity : ComponentActivity() {
         }
 
     }
+
 
 @Composable
 //Agregar HiltViewModewl
@@ -72,6 +67,7 @@ fun TodoApp2(modifier: Modifier = Modifier,
         // Lista de tareas
         TodoList(todos = todos, viewModel::updateTask, viewModel::addTask)
 
+
         // Espaciador
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -80,17 +76,7 @@ fun TodoApp2(modifier: Modifier = Modifier,
             value = newTaskText,
             onValueChange = { newTaskText = it },
             label = { Text("Nueva tarea") },
-            keyboardOptions = KeyboardOptions.Default.copy(
-                imeAction = ImeAction.Done
-            ),
-            keyboardActions = KeyboardActions(
-                onDone = {
-                    if (newTaskText.isNotEmpty()) {
-                        viewModel.addTask(TaskEntity(title = newTaskText))
-                        newTaskText = ""
-                    }
-                }
-            ),
+
             modifier = Modifier
                 .fillMaxWidth()
                 .background(MaterialTheme.colorScheme.background)
@@ -99,7 +85,7 @@ fun TodoApp2(modifier: Modifier = Modifier,
         IconButton(
             onClick = {
                 if (newTaskText.isNotEmpty()) {
-                    viewModel.addTask(TaskEntity(title = newTaskText))
+                    viewModel.addTask(title = newTaskText)
                     newTaskText = ""
                 }
             },
@@ -183,46 +169,5 @@ fun TodoItem(todo: TaskEntity, onTaskCheckedChange: (TaskEntity) -> Unit, onTask
 
     }
 
-}
-@Composable
-fun TodoActionIcon(icon: ImageVector, onClick: () -> Unit) {
-    IconButton(onClick = onClick, modifier = Modifier.background(MaterialTheme.colorScheme.primary)) {
-        Icon(imageVector = icon, contentDescription = null)
-    }
-}
-
-@OptIn(ExperimentalComposeUiApi::class)
-@Composable
-fun TodoInputField(
-    value: String,
-    onValueChange: (String) -> Unit,
-    onAddTask: () -> Unit,
-    onImeAction: () -> Unit = {},
-    onEditComplete: () -> Unit = {}
-) {
-    val keyboardController = LocalSoftwareKeyboardController.current
-
-
-    OutlinedTextField(
-        value = value,
-        onValueChange = { onValueChange(it) },
-        label = { Text("Nueva tarea") },
-        keyboardOptions = KeyboardOptions.Default.copy(
-            imeAction = ImeAction.Done
-        ),
-        keyboardActions = KeyboardActions(
-            onDone = {
-                if (value.isNotEmpty()) {
-                    onAddTask()
-                    keyboardController?.hide()
-                    onImeAction()
-                }
-            }
-        ),
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.background),
-        singleLine = true
-    )
 }
 

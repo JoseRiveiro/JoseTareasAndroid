@@ -9,9 +9,9 @@ import javax.inject.Inject
 @HiltViewModel
 class TaskViewModel @Inject constructor(private val taskDao: TaskDao) : ViewModel() {
 
-    // val todos: List<TaskEntity> = taskDao.getAll()
+    val todos: List<TaskEntity> = taskDao.getAll()
 
-    fun addTask(title: String) {
+   fun addTask(title: String) {
         viewModelScope.launch {
             val taskEntity = TaskEntity(title = title)
             taskDao.insertTask(taskEntity)
@@ -19,7 +19,7 @@ class TaskViewModel @Inject constructor(private val taskDao: TaskDao) : ViewMode
     }
 
 
-    fun updateTask(task: TaskEntity) {
+   fun updateTask(task: TaskEntity) {
         viewModelScope.launch {
             taskDao.updateTask(task)
         }
@@ -30,5 +30,55 @@ class TaskViewModel @Inject constructor(private val taskDao: TaskDao) : ViewMode
             taskDao.insertTask(task)
         }
     }
-}
+    fun deleteTask(task: TaskEntity) {
+        viewModelScope.launch {
+            taskDao.deleteTask(task)
 
+        }
+    }
+
+
+
+
+
+   /* private val _todos: MutableLiveData<List<TaskEntity>> = MutableLiveData()
+    val todos: LiveData<List<TaskEntity>> = _todos
+
+    init {
+        viewModelScope.launch {
+            _todos.postValue(taskDao.getAll())
+        }
+    }
+
+    fun addTask(title: String) {
+        viewModelScope.launch {
+            val taskEntity = TaskEntity(title = title)
+            taskDao.insertTask(taskEntity)
+            _todos.postValue(taskDao.getAll()) // Actualizar la lista después de insertar
+        }
+    }
+    fun addTask(task: TaskEntity) {
+        viewModelScope.launch {
+
+            taskDao.insertTask(task)
+            _todos.postValue(taskDao.getAll()) // Actualizar la lista después de insertar
+        }
+    }
+    fun updateTask(task: TaskEntity) {
+        viewModelScope.launch {
+            taskDao.updateTask(task)
+            _todos.postValue(taskDao.getAll()) // Actualizar la lista después de actualizar
+        }
+    }
+
+    fun deleteTask(task: TaskEntity) {
+        viewModelScope.launch {
+            taskDao.deleteTask(task)
+            _todos.postValue(taskDao.getAll()) // Actualizar la lista después de eliminar
+        }
+    }
+
+
+    */
+
+}

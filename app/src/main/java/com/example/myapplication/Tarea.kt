@@ -1,16 +1,17 @@
 package com.example.myapplication
 
 data class Tarea (
-    val id: Long? = null,
+    val id: Long? = 1,
     val title: String,
-
-    var isCompleted: Boolean = false
+    var isCompleted: Boolean = false,
+    var details: String = " "
 )
 fun Tarea.toEntity() = TaskEntity(
 
    id = id?:0,
     title = title,
-   isCompleted = isCompleted
+   isCompleted = isCompleted,
+    details = details
 
 
 )

@@ -9,9 +9,12 @@ class TaskEntity(
     val id: Long = 0,
     @ColumnInfo(name = "title") val title: String,
     @ColumnInfo(name = "isCompleted") val isCompleted: Boolean = false,
+    @ColumnInfo(name = "details") var details: String
+
 )
 fun TaskEntity.toDomain() = Tarea(
     id = id,
     title= title,
-  isCompleted = isCompleted
+  isCompleted = isCompleted,
+    details = details
 )

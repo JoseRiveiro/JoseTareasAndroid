@@ -12,15 +12,18 @@ import javax.inject.Inject
 class TaskViewModel @Inject constructor (private val taskDao: TaskDao, val taskRepository: TaskRepository) : ViewModel() {
 
     //val todos: List<TaskEntity> = taskDao.getAll()
-private val _state = MutableStateFlow<List<Tarea>>(emptyList())
+    private val _state = MutableStateFlow<List<Tarea>>(emptyList())
     val state = _state
 
-    init { viewModelScope.launch {
-        taskRepository.getAllTasks().collect{
-            _state.emit(it)
+    init {
+        viewModelScope.launch {
+            taskRepository.getAllTasks().collect {
+                _state.emit(it)
+            }
         }
-    }}
-   fun addTask(title: String) {
+    }
+
+    fun addTask(title: String) {
         viewModelScope.launch {
             val tarea = Tarea(title = title)
             taskRepository.saveTask(tarea)
@@ -29,7 +32,7 @@ private val _state = MutableStateFlow<List<Tarea>>(emptyList())
     }
 
 
-   fun updateTask(task: Tarea) {
+    fun updateTask(task: Tarea) {
         viewModelScope.launch {
             taskRepository.updateTask(task)
         }
@@ -40,12 +43,14 @@ private val _state = MutableStateFlow<List<Tarea>>(emptyList())
 
         }
     }
+
     fun deleteTask(task: Tarea) {
         viewModelScope.launch {
             taskRepository.deleteTask(task)
 
         }
     }
+
 
 
 

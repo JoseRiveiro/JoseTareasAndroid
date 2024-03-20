@@ -7,6 +7,7 @@ object TareasDB : BaseColumns {
     const val   COLUMN_task = "task"
     const val  COLUMN_isCompleted = "Estado"
     const val  COLUMN_id = "id"
+    const val COLUMN_details="details"
 }
 
 const val SQL_CREATE_ENTRIES = """
@@ -14,6 +15,7 @@ const val SQL_CREATE_ENTRIES = """
         ${TareasDB.COLUMN_task} TEXT,
         ${TareasDB.COLUMN_isCompleted} TEXT,
         ${TareasDB.COLUMN_id} TEXT PRIMARY KEY,
+          ${TareasDB.COLUMN_details} TEXT,
         
     )
     """

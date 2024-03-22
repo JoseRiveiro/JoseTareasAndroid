@@ -1,6 +1,8 @@
 package com.example.myapplication.features.tareasScreen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,7 +15,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Card
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
@@ -44,9 +45,12 @@ fun TodoList(
     navigateToTareasDescripcion: (Tarea)-> Unit
 ) {
     LazyColumn {
+
         items(todos) { task ->
+
             TodoItem(task, onTaskCheckedChange, onTaskEdit, onDeleteTask, navigateToTareasDescripcion)
-        }
+
+     }
     }
 }
 
@@ -57,6 +61,7 @@ fun TodoItem(todo: Tarea,
              onDeleteTask: (Tarea)-> Unit,
              navigateToTareasDescripcion: (Tarea)-> Unit
             ) {
+    Box(modifier = Modifier.clickable { navigateToTareasDescripcion(todo)}){
     Card(
         modifier = Modifier
 
@@ -91,7 +96,7 @@ fun TodoItem(todo: Tarea,
             Spacer(modifier = Modifier.weight(1f))
 
             // Empieza el botón para ir a la descripción de la tarea
-
+/*
             IconButton(
                 onClick = {
                     navigateToTareasDescripcion(todo)
@@ -105,6 +110,8 @@ fun TodoItem(todo: Tarea,
 
 
 
+ */
+
             IconButton(
                 onClick = {
                     onDeleteTask(todo)
@@ -117,6 +124,7 @@ fun TodoItem(todo: Tarea,
             }
         }
     }
+}
 }
 
 @Composable

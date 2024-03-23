@@ -3,6 +3,7 @@ package com.example.myapplication.features.tareasScreen
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import com.example.myapplication.features.tareasDesc.navigateToTareasDescripcion
 
 const val TareasScreen_ROUTE = "TareasScreenRoute"
 
@@ -16,6 +17,6 @@ fun NavGraphBuilder.todoScreen(
 ) {
 
     composable(route = TareasScreen_ROUTE) {
-        TodoApp2(navigateToTareasDescripcion = { tarea -> navHostController.navigateToTareas() })
+        TodoApp2(navigateToTareasDescripcion = { tarea ->navHostController.navigateToTareasDescripcion()})
     }
 }

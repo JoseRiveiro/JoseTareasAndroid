@@ -1,9 +1,10 @@
 package com.example.myapplication.features.tareasDesc
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -11,42 +12,43 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun TareasDescripcion2(
 
-    ) {
+  //  tarea: Tarea, // Pasar la tarea como argumento
+   // viewModel: TaskViewModel // ViewModel para interactuar con la base de datos
+    )
+{
+   // var editarTexto by remember { mutableStateOf(tarea.details) }
     var editarTexto by remember { mutableStateOf("") }
-    Column(modifier = Modifier.fillMaxSize()) {
+
+
+    Column(modifier = Modifier.fillMaxSize().padding(start = 16.dp, end = 16.dp, top = 50.dp)) {
         OutlinedTextField(
             value = editarTexto,
-            onValueChange = { editarTexto = it },
+           onValueChange = { editarTexto = it },
             label = { Text("Editar Texto") },
 
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth().weight(1f).padding(bottom = 16.dp)
         )
+
+        // Botón para guardar el texto editado
+        Button(
+            onClick = {
+              //  val tareaActualizada = tarea.copy(details = editarTexto)
+              // viewModel.updateTask(tarea)
+
+
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Guardar")
+
+        }
+
     }
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically
 
-    ) {
-        /*
-            IconButton(
-                onClick = { navController.popBackStack() }, // Llama a la función de devolución de llamada cuando se hace clic en el botón
-                modifier = Modifier.padding(end = 8.dp) // Agrega un pequeño espacio entre el botón y el texto
-            ) {
-                Icon(
-                    imageVector = Icons.Filled.ArrowBack,
-                    contentDescription = "Back"
-                )
-
-                Spacer(modifier = Modifier.weight(1f))
-            }
-
-         */
-    }
-    
 }

@@ -1,7 +1,7 @@
 package com.example.myapplication
 
 data class Tarea (
-    val id: Long? = 1,
+    val id: Long? = 0,
     val title: String,
     var isCompleted: Boolean = false,
     var details: String = " "

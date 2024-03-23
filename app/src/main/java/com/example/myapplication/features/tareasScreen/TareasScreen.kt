@@ -1,8 +1,6 @@
 package com.example.myapplication.features.tareasScreen
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -15,6 +13,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Card
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
@@ -61,7 +60,8 @@ fun TodoItem(todo: Tarea,
              onDeleteTask: (Tarea)-> Unit,
              navigateToTareasDescripcion: (Tarea)-> Unit
             ) {
-    Box(modifier = Modifier.clickable { navigateToTareasDescripcion(todo)}){
+    //Box(modifier = Modifier.clickable { navigateToTareasDescripcion(todo)}){
+
     Card(
         modifier = Modifier
 
@@ -96,10 +96,11 @@ fun TodoItem(todo: Tarea,
             Spacer(modifier = Modifier.weight(1f))
 
             // Empieza el botón para ir a la descripción de la tarea
-/*
+
             IconButton(
                 onClick = {
                     navigateToTareasDescripcion(todo)
+
                 },
                 modifier = Modifier
                     .background(MaterialTheme.colorScheme.primary)
@@ -110,7 +111,7 @@ fun TodoItem(todo: Tarea,
 
 
 
- */
+
 
             IconButton(
                 onClick = {
@@ -125,13 +126,13 @@ fun TodoItem(todo: Tarea,
         }
     }
 }
-}
+//}
 
 @Composable
 //Agregar HiltViewModewl
 fun TodoApp2(modifier: Modifier = Modifier,
              viewModel: TaskViewModel = hiltViewModel(),
-             navigateToTareasDescripcion: (Tarea)-> Unit
+             navigateToTareasDescripcion: (Tarea?)-> Unit
 ) {
     val todos by viewModel.state.collectAsState()
     var newTaskText by remember { mutableStateOf("") }
@@ -139,7 +140,7 @@ fun TodoApp2(modifier: Modifier = Modifier,
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(start = 16.dp, end = 16.dp, top = 50.dp)
     ) {
         // Lista de tareas
         TodoList(todos = todos, viewModel::updateTask, viewModel::addTask, viewModel::deleteTask,  navigateToTareasDescripcion )

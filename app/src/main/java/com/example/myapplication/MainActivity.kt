@@ -16,8 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.myapplication.features.tareasDesc.TareasDescripcion2
 import com.example.myapplication.features.tareasDesc.navigateToTareasDescripcion
+import com.example.myapplication.features.tareasDesc.tareasDescripcionScreen
 import com.example.myapplication.features.tareasScreen.TodoApp2
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,36 +30,32 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             val navHostController = rememberNavController()
-Box(modifier = Modifier.padding(PaddingValues())){
-
-    NavHost(navController = navHostController, startDestination = "TareasScreen" ){
-      composable("TareasScreen") {
-      TodoApp2(navigateToTareasDescripcion = {Tarea -> navHostController.navigateToTareasDescripcion()})
-          
-
-      }
-        composable("TareasDesciprion") {
-            TareasDescripcion2()
-        }
-
-                
-            }
-        }
-
-
-            TopAppBar(
-                title = { Text("Tareas") },
-                navigationIcon = {
-                    IconButton(onClick = { navHostController.popBackStack() }) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Go Back")
+            Box(modifier = Modifier.padding(PaddingValues())) {
+                TopAppBar(
+                    title = { Text("Tareas") },
+                    navigationIcon = {
+                        IconButton(onClick = { navHostController.popBackStack() }) {
+                            Icon(Icons.Default.ArrowBack, contentDescription = "Go Back")
+                        }
+                    },
+                    modifier = Modifier
+                )
+                NavHost(navController = navHostController, startDestination = "TareasScreen") {
+                    composable("TareasScreen") {
+                        TodoApp2(navigateToTareasDescripcion = { tarea -> navHostController.navigateToTareasDescripcion() }
+                        )
                     }
-                },
-                modifier = Modifier)
+                    tareasDescripcionScreen(navHostController)
+
+                }
+
+
+
+            }
+
 
         }
     }
-
-
 }
 
 

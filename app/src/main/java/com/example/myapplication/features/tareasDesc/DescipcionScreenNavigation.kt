@@ -11,11 +11,12 @@ const val DESC_ROUTE = "TareasDescripcion"
 fun NavHostController.navigateToTareasDescripcion(){
     this.navigate(DESC_ROUTE)
 }
-fun NavGraphBuilder.TareasDescripcion(
+fun NavGraphBuilder.tareasDescripcionScreen(
     navHostController: NavHostController
+
 ) {
+    composable(route = DESC_ROUTE){
+TareasDescripcion2( )
+    }
 
-    composable(route = DESC_ROUTE) {
-
-        }
     }

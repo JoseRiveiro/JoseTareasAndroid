@@ -17,6 +17,10 @@ fun NavGraphBuilder.todoScreen(
 ) {
 
     composable(route = TareasScreen_ROUTE) {
-        TodoApp2(navigateToTareasDescripcion = { tarea ->navHostController.navigateToTareasDescripcion()})
+        TodoApp2(navigateToTareasDescripcion = {tarea -> tarea.id?.let { it1 ->
+            navHostController.navigateToTareasDescripcion(
+                it1
+            )
+        } })
     }
 }

@@ -14,12 +14,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.myapplication.Tarea
 
 @Composable
 fun TareasDescripcion2(
 
-  //  tarea: Tarea, // Pasar la tarea como argumento
-   // viewModel: TaskViewModel // ViewModel para interactuar con la base de datos
+    id:Long, // Pasar la tarea como argumento
+   //viewModel: TaskViewModel // ViewModel para interactuar con la base de datos
     )
 {
    // var editarTexto by remember { mutableStateOf(tarea.details) }
@@ -38,9 +39,10 @@ fun TareasDescripcion2(
         // Botón para guardar el texto editado
         Button(
             onClick = {
-              //  val tareaActualizada = tarea.copy(details = editarTexto)
-              // viewModel.updateTask(tarea)
+                      val tarea : Tarea
 
+               // tarea.details = editarTexto
+              // viewModel.updateTask(tarea)
 
             },
             modifier = Modifier.fillMaxWidth()

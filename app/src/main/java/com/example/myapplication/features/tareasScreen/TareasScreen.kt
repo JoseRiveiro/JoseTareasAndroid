@@ -132,7 +132,7 @@ fun TodoItem(todo: Tarea,
 //Agregar HiltViewModewl
 fun TodoApp2(modifier: Modifier = Modifier,
              viewModel: TaskViewModel = hiltViewModel(),
-             navigateToTareasDescripcion: (Tarea?)-> Unit
+             navigateToTareasDescripcion: (Tarea)-> Unit
 ) {
     val todos by viewModel.state.collectAsState()
     var newTaskText by remember { mutableStateOf("") }
@@ -175,6 +175,8 @@ fun TodoApp2(modifier: Modifier = Modifier,
         ) {
             Icon(imageVector = Icons.Default.Add, contentDescription = "Add Task")
         }
+
+
     }
 }
 

@@ -14,18 +14,23 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.myapplication.Tarea
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.myapplication.TaskViewModel
 
 @Composable
 fun TareasDescripcion2(
 
-    id:Long, // Pasar la tarea como argumento
-   //viewModel: TaskViewModel // ViewModel para interactuar con la base de datos
+                       id:Long, // Pasar la tarea como argumento
+   viewModel: TaskViewModel = hiltViewModel() // ViewModel para interactuar con la base de datos
     )
 {
    // var editarTexto by remember { mutableStateOf(tarea.details) }
+
+
+
     var editarTexto by remember { mutableStateOf("") }
 
+//editarTexto = viewModel.getTask(id)
 
     Column(modifier = Modifier.fillMaxSize().padding(start = 16.dp, end = 16.dp, top = 50.dp)) {
         OutlinedTextField(
@@ -39,10 +44,12 @@ fun TareasDescripcion2(
         // Botón para guardar el texto editado
         Button(
             onClick = {
-                      val tarea : Tarea
 
-               // tarea.details = editarTexto
-              // viewModel.updateTask(tarea)
+
+
+                //tarea.details = editarTexto
+
+              //  viewModel.updateTask(tarea)
 
             },
             modifier = Modifier.fillMaxWidth()
@@ -54,3 +61,4 @@ fun TareasDescripcion2(
     }
 
 }
+

@@ -30,7 +30,6 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.myapplication.features.tareasDesc.tareasDescripcionScreen
@@ -60,24 +59,29 @@ val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppB
 
                         })
                 },
+                /*
                 bottomBar = {
                     tareasNavigationBar(navController = navHostController)
 
                 },
+
+
+                 */
+
             ) {paddingValues ->
 
 
 
      Box(modifier = Modifier.padding(paddingValues))
                 NavHost(navController = navHostController, startDestination = TareasScreen_ROUTE) {
-                    composable(TareasScreen_ROUTE) {
+
 
 
                         todoScreen(navHostController = navHostController)
                         tareasDescripcionScreen()
                         //currentTareaScreen()
 
-                    }
+
                     //tareasDescripcionScreen(navHostController)
 
                 }

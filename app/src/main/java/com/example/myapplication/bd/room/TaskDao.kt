@@ -14,6 +14,7 @@ interface TaskDao {
 
     @Query("SELECT * FROM tasks")
     fun getAll(): Flow<List<TaskEntity>>
+  //  @Query("SELECT details FROM  tasks where id = id")
 
     @Insert
     suspend fun insertTask(task: TaskEntity)
@@ -22,4 +23,6 @@ interface TaskDao {
 
     @Update
     suspend fun updateTask(task: TaskEntity)
+
+
 }

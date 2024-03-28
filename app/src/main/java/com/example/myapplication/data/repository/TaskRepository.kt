@@ -11,7 +11,9 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
-class TaskRepository @Inject constructor(private val taskDao: TaskDao, private val sqlite:TaskDao){
+class TaskRepository @Inject constructor(private val taskDao: TaskDao
+
+                                         ){
 
 suspend fun getAllTasks(): Flow<List<Tarea>> {
     return withContext(Dispatchers.IO){
@@ -23,6 +25,7 @@ suspend fun getAllTasks(): Flow<List<Tarea>> {
     suspend fun saveTask(tarea: Tarea){
         withContext(Dispatchers.IO){
             taskDao.insertTask(tarea.toEntity())
+
         }
     }
 
@@ -37,4 +40,6 @@ suspend fun getAllTasks(): Flow<List<Tarea>> {
             taskDao.updateTask(tarea.toEntity())
         }
     }
+
+
 }

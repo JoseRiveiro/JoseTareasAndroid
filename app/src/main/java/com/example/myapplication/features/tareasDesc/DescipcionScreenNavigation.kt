@@ -9,7 +9,11 @@ const val DESC_ROUTE = "TareasDescripcion"
 
 
 
-fun NavHostController.navigateToTareasDescripcion(id: Long) {
+fun NavHostController.navigateToTareasDescripcion(
+
+    id: Long
+
+) {
 
 //id : Long?
     this.navigate("$DESC_ROUTE/$id")

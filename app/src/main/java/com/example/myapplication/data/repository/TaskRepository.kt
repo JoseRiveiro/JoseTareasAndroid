@@ -40,6 +40,23 @@ suspend fun getAllTasks(): Flow<List<Tarea>> {
             taskDao.updateTask(tarea.toEntity())
         }
     }
+    suspend fun getDetails(tarea: Tarea){
+        withContext(Dispatchers.IO){
+            taskDao.updateTask(tarea.toEntity())
+        }
+    }
+
+    suspend fun getDetailsById1(taskId: Long): String {
+        return withContext(Dispatchers.IO) {
+            taskDao.getDetailsById(taskId)
+        }
+    }
+
+    suspend fun updateTaskDetails(taskId: Long, newDetails: String) {
+        withContext(Dispatchers.IO) {
+            taskDao.updateTaskDetails(taskId, newDetails)
+        }
+    }
 
 
 }

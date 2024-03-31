@@ -1,13 +1,13 @@
 package com.example.myapplication.features.tareasDesc
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -29,23 +29,29 @@ fun TareasDescripcion2(
 
 
     var editarTexto by remember { mutableStateOf("") }
+    var editarTexto2 by remember { mutableStateOf("") }
 
-//editarTexto = viewModel.getTask(id)
 
-    Column(modifier = Modifier.fillMaxSize().padding(start = 16.dp, end = 16.dp, top = 50.dp)) {
+    LaunchedEffect(id) {
+        editarTexto = viewModel.getDetailsForTask(id)
+    }
+
+
+    Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 50.dp)) {
         OutlinedTextField(
             value = editarTexto,
            onValueChange = { editarTexto = it },
             label = { Text("Editar Texto") },
+            readOnly = false,
 
-            modifier = Modifier.fillMaxWidth().weight(1f).padding(bottom = 16.dp)
+            modifier = Modifier.fillMaxWidth().weight(1f).padding(bottom = 16.dp, top = 16.dp)
         )
 
         // Botón para guardar el texto editado
         Button(
             onClick = {
 
-
+                viewModel.updateTask(id, editarTexto)
 
                 //tarea.details = editarTexto
 

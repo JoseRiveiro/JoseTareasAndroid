@@ -25,7 +25,7 @@ class QueryTask @Inject constructor(private val tareasdb:SQLiteDatabase){
 
     }
 }
-/*
+
   suspend fun  getDetailsTask(id:Long): String{
         var detalles : String
         withContext(Dispatchers.IO){

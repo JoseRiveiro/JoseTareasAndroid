@@ -4,7 +4,7 @@ data class Tarea (
     var id: Long? = 0,
     val title: String,
     var isCompleted: Boolean = false,
-    var details: String = " "
+    var details: String = "Descripción"
 )
 fun Tarea.toEntity() = TaskEntity(
 

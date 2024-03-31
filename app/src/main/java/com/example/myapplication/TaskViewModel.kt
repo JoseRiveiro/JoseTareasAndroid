@@ -4,8 +4,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.myapplication.bd.room.TaskDao
 import com.example.myapplication.data.repository.TaskRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,8 +32,18 @@ class TaskViewModel @Inject constructor (private val taskDao: TaskDao, val taskR
 
         }
     }
+   suspend fun getDetailsForTask(taskId: Long): String {
 
 
+      return withContext(Dispatchers.IO){
+          taskRepository.getDetailsById1(taskId)
+      }
+    }
+     fun updateTask(taskId: Long, newDetails: String) {
+        viewModelScope.launch {
+            taskRepository.updateTaskDetails(taskId, newDetails)
+        }
+    }
     fun updateTask(task: Tarea) {
         viewModelScope.launch {
             taskRepository.updateTask(task)
